@@ -4,10 +4,10 @@ module.exports.config = {
   version: '1.0.0',
   role: 0,
   hasPrefix: false,
-  aliases: ['gpt', 'openai'],
+  aliases: ['gpt', 'openai', 'assistant'],
   description: "An AI command powered by GPT-4",
   usage: "Ai [promot]",
-  credits: '𝗮𝗲𝘀𝘁𝗵𝗲𝗿',
+  credits: 'Metoushela Walker',
   cooldown: 3,
 };
 module.exports.run = async function({
@@ -17,17 +17,17 @@ module.exports.run = async function({
 }) {
   const input = args.join(' ');
   if (!input) {
-    api.sendMessage(`♡   ∩_∩\n    （„• ֊ •„)♡\n┏━∪∪━━━━ღ❦ღ┓`, event.threadID, event.messageID);
+    api.sendMessage(`Oui quelle est votre question 🌐`, event.threadID, event.messageID);
     return;
   }
-  api.sendMessage(``, event.threadID, event.messageID);
+  api.sendMessage(`𝚂ｈ𝚎𝚊ｒ𝚌ｈ...\n━━━━━━━━━━━\n "${input}"`, event.threadID, event.messageID);
   try {
     const {
       data
-    } = await axios.get(`https://hashier-api-globalgpt.vercel.app/api/globalgpt?q=${encodeURIComponent(input)}`);
+    } = await axios.get(`https://metoushela-rest-api-tp5g.onrender.com/api/gpt4o?context=${encodeURIComponent(input)}`);
     const response = data.response;
-    api.sendMessage('♡   ∩_∩\n    （„• ֊ •„)♡\n┏━∪∪━━━━ღ❦ღ┓\n🌐['+ response +'] ♡\n♡   𝘢𝘦𝘴𝘵𝘩𝘦𝘳-[📩]\n┗ღ❦ღ━━━━━━━┛\n[✦]|𝗚𝗣𝗧-𝟰 ', event.threadID, event.messageID);
+    api.sendMessage('⚘𝗔𝘀𝘀𝗶𝘀𝘁𝗮𝗻𝘁⊰♔⊱\n\n⊰⊹⊱♡⊰⊹⊱♡⊰⊹⊱♡⊰⊹\n' + response + '\n╰┈➤⊹⊱✫⊰⊹⊱✫⊰🍀', event.threadID, event.messageID);
   } catch (error) {
-    api.sendMessage('An error occurred while processing your request.', event.threadID, event.messageID);
+    api.sendMessage('🔴 An error occurred while processing your request..', event.threadID, event.messageID);
   }
 };
